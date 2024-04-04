@@ -61,4 +61,15 @@ public class CustomerController {
             return new ResponseEntity<>("Customer Deleted Un Success!" , HttpStatus.FORBIDDEN);
         }
     }
+
+    @PutMapping("/updateCustomer/{customerId}")
+    private ResponseEntity<Object> updateCustomer(@PathVariable Long customerId ,  @RequestBody CustomerDTO customerDTO){
+        try {
+            Customer updateCustomer = customerSerice.updateCustomer(customerId, customerDTO);
+            return new ResponseEntity<>(updateCustomer , HttpStatus.OK);
+        }catch (Exception exception){
+            return new ResponseEntity<>("Customer Update Un Success!" , HttpStatus.FORBIDDEN);
+        }
+    }
+
 }

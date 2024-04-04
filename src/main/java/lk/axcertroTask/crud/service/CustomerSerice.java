@@ -41,4 +41,12 @@ public class CustomerSerice {
             return "Customer Deleted!";
         }return null;
     }
+
+    public Customer updateCustomer(Long customerId, CustomerDTO customerDTO) {
+
+        if (customerRepo.existsById(customerId)){
+            Customer update = customerRepo.save(new Customer(customerId, customerDTO.getFirstName(), customerDTO.getLastName(), customerDTO.getEmail()));
+            return update;
+        }return null;
+    }
 }
