@@ -1,10 +1,13 @@
 package lk.axcertroTask.crud.controller;
 
+import lk.axcertroTask.crud.dto.CustomerDTO;
+import lk.axcertroTask.crud.entity.Customer;
 import lk.axcertroTask.crud.service.CustomerSerice;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created By Imesh Hirushan
@@ -25,5 +28,15 @@ public class CustomerController {
     @Autowired
     public CustomerController(CustomerSerice customerSerice) {
         this.customerSerice = customerSerice;
+    }
+
+    @PostMapping("/saveCustomer")
+    public ResponseEntity<Object> saveCustomer(@RequestBody CustomerDTO customerDTO){
+        try {
+            Customer customer = customerSerice.saveCustomer(customerDTO);
+            return new ResponseEntity<>(customer , HttpStatus.CREATED);
+        }catch (Exception e){
+            return new ResponseEntity<>("Customer Save Un Success!" , HttpStatus.FORBIDDEN);
+        }
     }
 }
