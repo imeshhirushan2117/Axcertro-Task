@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * Created By Imesh Hirushan
  * Project Name : crud
@@ -38,5 +40,15 @@ public class CustomerController {
         }catch (Exception e){
             return new ResponseEntity<>("Customer Save Un Success!" , HttpStatus.FORBIDDEN);
         }
+    }
+
+    @GetMapping("/getAllCustomer")
+    public ResponseEntity<Object> getAllCustomer(){
+       try {
+           List<Customer> allCustomer = customerSerice.getAllCustomer();
+           return new ResponseEntity<>(allCustomer , HttpStatus.CREATED);
+       }catch (Exception exception){
+           return new ResponseEntity<>("No Customer" , HttpStatus.FORBIDDEN);
+       }
     }
 }

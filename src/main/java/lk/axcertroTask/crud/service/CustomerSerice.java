@@ -6,6 +6,8 @@ import lk.axcertroTask.crud.repo.CustomerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created By Imesh Hirushan
  * Project Name : crud
@@ -26,5 +28,10 @@ public class CustomerSerice {
     public Customer saveCustomer(CustomerDTO customerDTO) {
         Customer save = customerRepo.save(new Customer(customerDTO.getFirstName(), customerDTO.getLastName(), customerDTO.getEmail()));
         return save;
+    }
+
+    public List<Customer> getAllCustomer() {
+        List<Customer> all = customerRepo.findAll();
+        return all;
     }
 }
