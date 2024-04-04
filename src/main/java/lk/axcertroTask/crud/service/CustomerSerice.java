@@ -34,4 +34,11 @@ public class CustomerSerice {
         List<Customer> all = customerRepo.findAll();
         return all;
     }
+
+    public String deletedCustomer(Long customerId) {
+        if (customerRepo.existsById(customerId)){
+            customerRepo.deleteById(customerId);
+            return "Customer Deleted!";
+        }return null;
+    }
 }

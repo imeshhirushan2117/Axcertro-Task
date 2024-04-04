@@ -46,9 +46,19 @@ public class CustomerController {
     public ResponseEntity<Object> getAllCustomer(){
        try {
            List<Customer> allCustomer = customerSerice.getAllCustomer();
-           return new ResponseEntity<>(allCustomer , HttpStatus.CREATED);
+           return new ResponseEntity<>(allCustomer , HttpStatus.OK);
        }catch (Exception exception){
            return new ResponseEntity<>("No Customer" , HttpStatus.FORBIDDEN);
        }
+    }
+
+    @DeleteMapping("/deletedCustomer/{customerId}")
+    private ResponseEntity<Object> deletedCustomer(@PathVariable Long customerId){
+        try {
+            String deletedCustomer = customerSerice.deletedCustomer(customerId);
+            return new ResponseEntity<>(deletedCustomer , HttpStatus.OK);
+        }catch (Exception exception){
+            return new ResponseEntity<>("Customer Deleted Un Success!" , HttpStatus.FORBIDDEN);
+        }
     }
 }
